@@ -1,61 +1,175 @@
-
 "use client";
-import ContactForm from "@/components/ContactForm";
+
 import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Brain,
+  Code2,
+  Database,
+  ExternalLink,
+  GitBranch,
+  GraduationCap,
+  Mail,
+} from "lucide-react";
+
 import Navbar from "@/components/Navbar";
-import { type Language } from "@/data/translations";
+import ContactForm from "@/components/ContactForm";
+import type { Language } from "@/data/translations";
+
+type Project = {
+  number: string;
+  category: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  link?: string;
+  linkLabel?: string;
+  details: string;
+};
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>("es");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const es = language === "es";
 
-  const projects = [
+  const projects: Project[] = [
     {
       number: "01",
       category: "WEB DEVELOPMENT",
       title: "SortlyScan",
       description: es
-        ? "Plataforma educativa enfocada en el reconocimiento y clasificación de residuos mediante tecnología."
-        : "Educational platform focused on waste recognition and classification through technology.",
-      tags: ["Web", "Backend", "Technology"],
-      accent: "#35D6C0",
-      visual: "sortly",
+        ? "Plataforma educativa enfocada en la clasificación de residuos y el aprendizaje sobre el reciclaje."
+        : "Educational platform focused on waste classification and recycling awareness.",
+      technologies: ["Web Development", "Backend", "Education"],
+      link: "https://github.com/waltdev16/SortlyScan_ExpoTech",
+      linkLabel: "GitHub",
+      details: es
+        ? "Proyecto desarrollado en equipo para promover la educación ambiental mediante una plataforma de clasificación de residuos. Mi participación se concentró principalmente en el área de backend, además de apoyar en traducción y algunas tareas de frontend. Se realizó una prueba en dos centros educativos y el 90 % de los estudiantes participantes indicó que la herramienta era útil."
+        : "Team project designed to promote environmental education through a waste classification platform. My contribution focused mainly on backend development, with additional support in translation and some frontend tasks. A test was conducted in two schools, where 90% of participating students said the tool was helpful.",
     },
     {
       number: "02",
       category: "DATA ANALYSIS",
-      title: es ? "Hotspots Comerciales" : "Commercial Hotspots",
+      title: "Hotspots Comerciales",
       description: es
-        ? "Análisis de ubicaciones comerciales utilizando técnicas de agrupamiento y visualización de datos."
-        : "Analysis of commercial locations using clustering techniques and data visualization.",
-      tags: ["Python", "K-Means", "Data"],
-      accent: "#7EA9F8",
-      visual: "data",
+        ? "Análisis y agrupación de zonas comerciales mediante técnicas de aprendizaje automático."
+        : "Analysis and clustering of commercial areas using machine learning techniques.",
+      technologies: ["Python", "Pandas", "K-Means", "Streamlit"],
+      details: es
+        ? "Proyecto de análisis de datos que utiliza K-Means para identificar grupos de zonas comerciales. Se evaluaron diferentes cantidades de agrupaciones utilizando métricas como inercia y silhouette score."
+        : "Data analysis project using K-Means to identify groups of commercial areas. Different cluster configurations were evaluated using metrics such as inertia and silhouette score.",
     },
     {
       number: "03",
       category: "PYTHON DEVELOPMENT",
-      title: es ? "Laberinto interactivo" : "Interactive Maze",
+      title: "Laberinto interactivo",
       description: es
-        ? "Juego desarrollado en Python con generación de laberintos y búsqueda de caminos."
-        : "Python game featuring maze generation and pathfinding.",
-      tags: ["Python", "Pygame", "Algorithms"],
-      accent: "#E9B77D",
-      visual: "maze",
+        ? "Aplicación desarrollada en Python para generar y resolver laberintos."
+        : "Python application designed to generate and solve mazes.",
+      technologies: ["Python", "Pygame", "DFS", "BFS"],
+      details: es
+        ? "Proyecto individual que trabaja con algoritmos de búsqueda para explorar y resolver laberintos. Se utilizaron estrategias como Depth-First Search y Breadth-First Search."
+        : "Individual project using search algorithms to explore and solve mazes. Strategies such as Depth-First Search and Breadth-First Search were implemented.",
     },
     {
       number: "04",
       category: "MACHINE LEARNING",
-      title: es ? "Modelos predictivos" : "Predictive Models",
+      title: "Regresión lineal",
       description: es
-        ? "Prácticas de análisis de datos y regresión lineal para explorar relaciones y realizar predicciones."
-        : "Data analysis and linear regression exercises to explore relationships and make predictions.",
-      tags: ["Python", "Pandas", "Scikit-learn"],
-      accent: "#C49AF5",
-      visual: "code",
+        ? "Modelo predictivo que analiza la relación entre las horas de estudio y los resultados académicos."
+        : "Predictive model analyzing the relationship between study hours and academic performance.",
+      technologies: ["Python", "Pandas", "Matplotlib", "Scikit-learn"],
+      details: es
+        ? "Proyecto de análisis y predicción utilizando regresión lineal. Se trabajó con datos de horas de estudio y calificaciones, evaluando el modelo mediante métricas como R² y error cuadrático medio."
+        : "Analysis and prediction project using linear regression. Study hours and grades were analyzed, evaluating the model with metrics such as R² and mean squared error.",
+    },
+    {
+      number: "05",
+      category: "ARTIFICIAL INTELLIGENCE",
+      title: "AI Challenge",
+      description: es
+        ? "Exploración de algoritmos de inteligencia artificial para clasificación y agrupación de datos."
+        : "Exploration of artificial intelligence algorithms for data classification and clustering.",
+      technologies: ["Python", "K-Means", "KNN", "Data Analysis"],
+      details: es
+        ? "Proyecto basado en un conjunto de datos simulado de 500 estudiantes. Se utilizaron K-Means para agrupar datos y KNN para clasificación, comparando resultados con datos normalizados y sin normalizar."
+        : "Project based on a simulated dataset of 500 students. K-Means was used for clustering and KNN for classification, comparing results with normalized and non-normalized data.",
+    },
+    {
+      number: "06",
+      category: "WEB DEVELOPMENT",
+      title: "El Horóscopo",
+      description: es
+        ? "Proyecto web desarrollado con tecnologías de frontend y recursos visuales."
+        : "Web project developed using frontend technologies and visual resources.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      details: es
+        ? "Proyecto de desarrollo web en el que se trabajó con estructura HTML, estilos CSS y funcionalidades JavaScript. Actualmente se encuentra pendiente de organizar y revisar algunos recursos y enlaces."
+        : "Web development project involving HTML structure, CSS styling and JavaScript functionality. Some resources and links still need to be organized and reviewed.",
+    },
+    {
+      number: "07",
+      category: "APP DEVELOPMENT",
+      title: "Voltify",
+      description: es
+        ? "Aplicación desarrollada con Power Apps como solución tecnológica."
+        : "Application developed with Power Apps as a technological solution.",
+      technologies: ["Power Apps", "Backend", "App Development"],
+      link: "https://apps.powerapps.com/play/e/default-d8e3bd44-0bba-426b-952d-ada7bb17393c/a/7e7fec02-b2f4-4706-a6ad-2f4a6ce2d9f8?tenantId=d8e3bd44-0bba-426b-952d-ada7bb17393c&sourcetime=1795528860736",
+      linkLabel: es ? "Ver aplicación" : "View application",
+      details: es
+        ? "Proyecto realizado en equipo utilizando Power Apps. Mi participación estuvo principalmente relacionada con el backend, además de colaborar en algunas tareas de traducción y frontend."
+        : "Team project developed using Power Apps. My contribution was mainly related to backend tasks, with additional support in translation and frontend work.",
     },
   ];
+
+  const skills = [
+    {
+      icon: <Code2 size={21} />,
+      title: es ? "Desarrollo" : "Development",
+      items: ["Python", "HTML", "CSS", "JavaScript"],
+    },
+    {
+      icon: <Brain size={21} />,
+      title: es ? "Inteligencia artificial" : "Artificial Intelligence",
+      items: ["K-Means", "KNN", "Regression", "Classification"],
+    },
+    {
+      icon: <Database size={21} />,
+      title: es ? "Datos" : "Data",
+      items: ["Pandas", "NumPy", "Data Analysis"],
+    },
+    {
+      icon: <GitBranch size={21} />,
+      title: es ? "Herramientas" : "Tools",
+      items: ["Git", "GitHub", "VS Code", "Power Apps"],
+    },
+  ];
+
+  const softSkills = es
+    ? [
+        "Trabajo en equipo",
+        "Resolución de problemas",
+        "Adaptabilidad",
+        "Responsabilidad",
+        "Comunicación",
+        "Aprendizaje continuo",
+        "Pensamiento lógico",
+        "Creatividad",
+      ]
+    : [
+        "Teamwork",
+        "Problem-solving",
+        "Adaptability",
+        "Responsibility",
+        "Communication",
+        "Continuous learning",
+        "Logical thinking",
+        "Creativity",
+      ];
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#101C2C] text-[#F1F5F9]">
@@ -63,198 +177,152 @@ export default function Home() {
 
       {/* HERO */}
       <section
-        id="home"
-        className="hero-grid relative flex min-h-screen items-center px-6 pb-20 pt-40"
+        id="inicio"
+        className="relative flex min-h-[90vh] items-center px-6 py-24 md:px-16 lg:px-24"
       >
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative z-10">
-            <div className="mb-8 flex items-center gap-3">
-              <span className="h-px w-10 bg-[#35D6C0]" />
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#35D6C0]">
-                {es ? "Portafolio personal · 2026" : "Personal portfolio · 2026"}
-              </p>
-            </div>
+        <div className="absolute right-0 top-20 -z-0 h-72 w-72 rounded-full bg-[#35D6C0]/10 blur-[120px]" />
 
-            <p className="mb-3 text-lg text-[#AAB8C8]">
-              {es ? "Hola, soy Andrea." : "Hello, I'm Andrea."}
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-16 md:grid-cols-[1.3fr_0.7fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="mb-6 text-sm font-semibold tracking-[0.35em] text-[#35D6C0]">
+              PORTFOLIO 2026
             </p>
 
-            <h1 className="max-w-3xl text-5xl font-bold leading-[1.12] tracking-tight sm:text-7xl">
-              {es ? "Ideas que se convierten en " : "Turning ideas into "}
-              <span className="text-[#35D6C0]">
-                {es ? "soluciones." : "solutions."}
+            <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
+              {es ? "Andrea Beatriz" : "Andrea Beatriz"}
+              <span className="block text-[#35D6C0]">
+                Mejia Rauda.
               </span>
             </h1>
 
-            <p className="mt-7 max-w-xl text-base leading-8 text-[#AAB8C8]">
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[#AAB8C8]">
               {es
-                ? "Soy estudiante de tecnología, interesada en la programación, la inteligencia artificial y el desarrollo de proyectos que combinan creatividad e innovación."
-                : "I'm a technology student interested in programming, artificial intelligence, and developing projects that combine creativity and innovation."}
+                ? "Estudiante interesada en la programación, la tecnología y el desarrollo de soluciones innovadoras."
+                : "Student interested in programming, technology and the development of innovative solutions."}
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-4">
-              <a
-                href="#projects"
-                className="rounded-full bg-[#35D6C0] px-7 py-3.5 text-sm font-bold text-[#102331] transition hover:-translate-y-1 hover:bg-[#62E8D4]"
-              >
-                {es ? "Explorar proyectos" : "Explore projects"} ↗
-              </a>
-              <a
-                href="#contact"
-                className="rounded-full border border-[#536477] px-7 py-3.5 text-sm font-semibold text-white transition hover:border-[#35D6C0] hover:text-[#35D6C0]"
-              >
-                {es ? "Hablemos" : "Let's talk"}
-              </a>
-            </div>
-
-            <div className="mt-16 flex flex-wrap gap-8 border-t border-[#34465A] pt-7">
-              <div>
-                <p className="text-2xl font-bold text-white">04+</p>
-                <p className="mt-1 text-xs text-[#8FA0B3]">
-                  {es ? "Proyectos académicos" : "Academic projects"}
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-white">01</p>
-                <p className="mt-1 text-xs text-[#8FA0B3]">
-                  {es ? "Objetivo: seguir creciendo" : "Goal: keep growing"}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Ilustración original con formas CSS */}
-          <div className="relative mx-auto w-full max-w-[470px]">
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-[#35D6C0]/30" />
-            <div className="absolute -bottom-8 -left-8 h-28 w-28 rounded-full border border-[#7EA9F8]/30" />
-
-            <div className="relative overflow-hidden rounded-[2rem] border border-[#34465A] bg-[#1B2B3D] p-7 shadow-2xl">
-              <div className="flex items-center justify-between border-b border-[#34465A] pb-5">
-                <span className="text-xs font-semibold tracking-widest text-[#AAB8C8]">
-                  CREATIVE MINDSET
-                </span>
-                <span className="h-2.5 w-2.5 rounded-full bg-[#35D6C0]" />
-              </div>
-
-              <div className="relative flex aspect-square items-center justify-center">
-                <div className="absolute h-[78%] w-[78%] rounded-full border border-dashed border-[#62778D]/50" />
-                <div className="absolute h-[58%] w-[58%] rounded-full border border-[#35D6C0]/30" />
-
-                <div className="relative flex h-44 w-44 items-center justify-center rounded-[2.5rem] bg-[#35D6C0] shadow-2xl shadow-[#35D6C0]/10 rotate-[-7deg]">
-                  <div className="rotate-[7deg] text-center">
-                    <p className="text-6xl font-black tracking-tighter text-[#102331]">
-                      AR.
-                    </p>
-                    <p className="mt-2 text-[10px] font-bold tracking-[0.25em] text-[#102331]/70">
-                      CREATE / LEARN
-                    </p>
-                  </div>
-                </div>
-
-                <div className="absolute left-2 top-12 rounded-xl border border-[#536477] bg-[#26394E] px-4 py-3 shadow-lg">
-                  <span className="text-xl text-[#35D6C0]">{"</>"}</span>
-                  <p className="mt-1 text-[9px] tracking-wider text-[#C4D0DC]">
-                    CODE
-                  </p>
-                </div>
-
-                <div className="absolute bottom-12 right-1 rounded-xl border border-[#536477] bg-[#26394E] px-4 py-3 shadow-lg">
-                  <span className="text-xl text-[#7EA9F8]">✳</span>
-                  <p className="mt-1 text-[9px] tracking-wider text-[#C4D0DC]">
-                    IDEAS
-                  </p>
-                </div>
-
-                <span className="absolute right-12 top-7 text-2xl text-[#E9B77D]">✦</span>
-                <span className="absolute bottom-7 left-12 text-2xl text-[#C49AF5]">✳</span>
-              </div>
-
-              <div className="border-t border-[#34465A] pt-5">
-                <p className="text-sm font-semibold text-white">
-                  Andrea Beatriz Mejia Rauda
-                </p>
-                <p className="mt-1 text-xs text-[#8FA0B3]">
-                  {es
-                    ? "Tecnología · Desarrollo · Innovación"
-                    : "Technology · Development · Innovation"}
-                </p>
-              </div>
-            </div>
-
-            <p className="mt-5 text-center text-xs tracking-widest text-[#71859A]">
-              {es ? "APRENDER · CREAR · EVOLUCIONAR" : "LEARN · CREATE · EVOLVE"}
+            <p className="mt-3 text-base text-[#AAB8C8]">
+              {es
+                ? "Aspirante a Ingeniería en Mecatrónica y Robótica."
+                : "Aspiring Mechatronics and Robotics Engineer."}
             </p>
-          </div>
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href="#proyectos"
+                className="inline-flex items-center gap-3 rounded-full bg-[#35D6C0] px-7 py-3.5 font-semibold text-[#101C2C] transition hover:bg-[#72eadb]"
+              >
+                {es ? "Explorar proyectos" : "Explore projects"}
+                <ArrowUpRight size={19} />
+              </a>
+
+              <a
+                href="#contacto"
+                className="inline-flex items-center gap-3 rounded-full border border-[#526477] px-7 py-3.5 font-medium transition hover:border-[#35D6C0] hover:text-[#35D6C0]"
+              >
+                {es ? "Contactarme" : "Contact me"}
+                <Mail size={18} />
+              </a>
+            </div>
+
+            <div className="mt-16 flex items-center gap-3 text-sm text-[#AAB8C8]">
+              <span className="h-px w-12 bg-[#35D6C0]" />
+              {es ? "Desliza para conocer más" : "Scroll to discover more"}
+              <ArrowDown size={16} className="text-[#35D6C0]" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="relative mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center rounded-[2rem] border border-[#34465A] bg-[#1B2B3D] p-8"
+          >
+            <div className="absolute inset-4 rounded-[1.5rem] border border-[#35D6C0]/20" />
+            <div className="text-center">
+              <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-3xl bg-[#35D6C0]/10 text-[#35D6C0]">
+                <Code2 size={48} strokeWidth={1.3} />
+              </div>
+              <p className="text-xl font-semibold">Technology</p>
+              <p className="mt-2 text-sm tracking-widest text-[#AAB8C8]">
+                LEARN · CREATE · INNOVATE
+              </p>
+            </div>
+            <span className="absolute -right-3 top-12 h-5 w-5 rounded-full bg-[#35D6C0]" />
+            <span className="absolute -bottom-3 left-12 h-5 w-5 rounded-full border-2 border-[#35D6C0] bg-[#101C2C]" />
+          </motion.div>
         </div>
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="section-padding bg-[#142337]">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+      <section id="sobre-mi" className="border-t border-[#34465A] px-6 py-24 md:px-16 lg:px-24">
+        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <p className="section-label">01 / {es ? "SOBRE MÍ" : "ABOUT ME"}</p>
-            <h2 className="section-title mt-5">
-              {es ? "Un poco sobre " : "A little about "}
-              <span className="accent-text">{es ? "mí." : "me."}</span>
+            <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
+              01 / {es ? "PERFIL" : "PROFILE"}
+            </p>
+            <h2 className="mt-5 text-4xl font-semibold">
+              {es ? "Sobre mí" : "About me"}
             </h2>
           </div>
 
           <div>
-            <p className="text-lg leading-9 text-[#C1CCD7]">
+            <p className="text-xl leading-9 text-[#D5DEE8]">
               {es
-                ? "Soy una estudiante interesada en la tecnología y en cómo las ideas pueden transformarse en soluciones útiles. Durante mi formación he trabajado en proyectos de programación, desarrollo web y análisis de datos."
-                : "I'm a student interested in technology and how ideas can become useful solutions. During my education, I've worked on programming, web development, and data analysis projects."}
-            </p>
-            <p className="mt-5 leading-8 text-[#8FA0B3]">
-              {es
-                ? "Me gusta aprender, enfrentar nuevos retos y colaborar con otras personas. Mi meta es continuar mi formación en Ingeniería en Mecatrónica y Robótica, explorando la conexión entre software, tecnología y creatividad."
-                : "I enjoy learning, taking on new challenges, and collaborating with others. My goal is to continue studying Mechatronics and Robotics Engineering, exploring the connection between software, technology, and creativity."}
+                ? "Soy estudiante de bachillerato con formación en informática e inglés. Me interesa aprender sobre programación, inteligencia artificial y nuevas tecnologías, y aplicar mis conocimientos en proyectos que aporten soluciones."
+                : "I am a high school student with training in computer science and English. I am interested in programming, artificial intelligence and new technologies, and applying my knowledge to projects that provide solutions."}
             </p>
 
-            <div className="mt-9 grid gap-4 sm:grid-cols-3">
-              {[
-                es ? "Aprendizaje continuo" : "Continuous learning",
-                es ? "Trabajo en equipo" : "Teamwork",
-                es ? "Resolución de problemas" : "Problem solving",
-              ].map((item) => (
-                <div key={item} className="rounded-xl border border-[#34465A] bg-[#1B2B3D] p-4">
-                  <span className="text-[#35D6C0]">✳</span>
-                  <p className="mt-3 text-sm font-medium text-[#E4EBF2]">{item}</p>
-                </div>
-              ))}
-            </div>
+            <p className="mt-6 leading-8 text-[#AAB8C8]">
+              {es
+                ? "Me considero una persona responsable, perseverante y abierta a nuevos desafíos. Disfruto trabajar en equipo, aprender de otras personas y desarrollar mis habilidades constantemente."
+                : "I consider myself responsible, persistent and open to new challenges. I enjoy teamwork, learning from others and continuously developing my skills."}
+            </p>
           </div>
         </div>
       </section>
 
       {/* EXPERIENCE */}
-      <section id="experience" className="section-padding">
+      <section id="experiencia" className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <p className="section-label">02 / {es ? "EXPERIENCIA" : "EXPERIENCE"}</p>
-          <h2 className="section-title mt-5">
-            {es ? "Mi camino de " : "My learning "}
-            <span className="accent-text">{es ? "aprendizaje." : "journey."}</span>
+          <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
+            02 / {es ? "FORMACIÓN" : "BACKGROUND"}
+          </p>
+
+          <h2 className="mt-5 text-4xl font-semibold">
+            {es ? "Experiencia y aprendizaje" : "Experience & Learning"}
           </h2>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            <div className="rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-7">
-              <p className="text-xs font-semibold tracking-widest text-[#35D6C0]">2026</p>
-              <h3 className="mt-4 text-xl font-bold">SortlyScan</h3>
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-8">
+              <span className="text-sm tracking-widest text-[#35D6C0]">
+                EDUCATION
+              </span>
+              <h3 className="mt-5 text-2xl font-semibold">
+                Centro ¡Supérate! Fundación Frech
+              </h3>
               <p className="mt-3 leading-7 text-[#AAB8C8]">
                 {es
-                  ? "Participación en el desarrollo de una plataforma educativa, principalmente en tareas de backend y apoyo en otras áreas del proyecto."
-                  : "Participation in the development of an educational platform, mainly in backend tasks and support in other project areas."}
+                  ? "Formación en informática, inglés y valores, con énfasis en el desarrollo de habilidades tecnológicas y personales."
+                  : "Training in computer science, English and values, with an emphasis on developing technological and personal skills."}
               </p>
             </div>
-            <div className="rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-7">
-              <p className="text-xs font-semibold tracking-widest text-[#35D6C0]">
-                {es ? "FORMACIÓN ACADÉMICA" : "ACADEMIC EXPERIENCE"}
-              </p>
-              <h3 className="mt-4 text-xl font-bold">Centro ¡Supérate!</h3>
+
+            <div className="rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-8">
+              <span className="text-sm tracking-widest text-[#35D6C0]">
+                EDUCATION
+              </span>
+              <h3 className="mt-5 text-2xl font-semibold">
+                Instituto Emiliani
+              </h3>
               <p className="mt-3 leading-7 text-[#AAB8C8]">
                 {es
-                  ? "Desarrollo de habilidades informáticas, inglés, valores y participación en proyectos colaborativos."
-                  : "Development of computer skills, English, values, and participation in collaborative projects."}
+                  ? "Bachillerato General con Diplomado en Inglés."
+                  : "General High School Diploma with an English Diploma."}
               </p>
             </div>
           </div>
@@ -262,159 +330,275 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="section-padding bg-[#142337]">
+      <section id="proyectos" className="px-6 py-24 md:px-16 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-end justify-between gap-5">
-            <div>
-              <p className="section-label">03 / {es ? "PORTAFOLIO" : "PORTFOLIO"}</p>
-              <h2 className="section-title mt-5">
-                {es ? "Proyectos " : "Selected "}
-                <span className="accent-text">{es ? "destacados." : "projects."}</span>
-              </h2>
-            </div>
-            <p className="max-w-xs text-sm leading-6 text-[#8FA0B3]">
+          <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
+            03 / {es ? "TRABAJO" : "WORK"}
+          </p>
+
+          <div className="mt-5 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <h2 className="text-4xl font-semibold">
+              {es ? "Proyectos destacados" : "Featured Projects"}
+            </h2>
+            <p className="max-w-md leading-7 text-[#AAB8C8]">
               {es
-                ? "Una selección de proyectos y ejercicios realizados durante mi formación."
-                : "A selection of projects and exercises developed during my education."}
+                ? "Una selección de proyectos académicos y tecnológicos en los que he participado."
+                : "A selection of academic and technological projects I have participated in."}
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <article
+              <motion.article
                 key={project.number}
-                className="project-card group overflow-hidden rounded-2xl border border-[#34465A] bg-[#1B2B3D]"
+                whileHover={{ y: -6 }}
+                className="group flex flex-col rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-7 transition hover:border-[#35D6C0]/70"
               >
-                <div className="relative flex h-56 items-center justify-center overflow-hidden bg-[#22364B]">
-                  <div className="absolute left-5 top-5 text-xs font-semibold tracking-widest text-[#AAB8C8]">
-                    PROJECT / {project.number}
-                  </div>
-
-                  {project.visual === "sortly" && (
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#35D6C0] text-4xl text-[#102331]">♻</div>
-                      <div>
-                        <p className="text-3xl font-bold text-white">Sortly</p>
-                        <p className="text-sm text-[#35D6C0]">Scan · Learn · Recycle</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {project.visual === "data" && (
-                    <div className="flex h-36 items-end gap-3">
-                      {[45, 80, 60, 100, 70, 90].map((height, i) => (
-                        <div key={i} style={{ height: `${height}%` }} className="w-8 rounded-t-lg bg-[#7EA9F8] opacity-80" />
-                      ))}
-                    </div>
-                  )}
-
-                  {project.visual === "maze" && (
-                    <div className="grid grid-cols-5 gap-2">
-                      {Array.from({ length: 25 }).map((_, i) => (
-                        <div key={i} className={`h-7 w-7 rounded-sm ${[0, 1, 5, 7, 9, 10, 12, 14, 17, 19, 20, 22].includes(i) ? "bg-[#E9B77D]" : "bg-[#40566C]"}`} />
-                      ))}
-                    </div>
-                  )}
-
-                  {project.visual === "code" && (
-                    <div className="w-3/4 rounded-xl border border-[#536477] bg-[#101C2C] p-5 font-mono text-xs leading-7">
-                      <p className="text-[#C49AF5]">model = LinearRegression()</p>
-                      <p className="text-[#35D6C0]">model.fit(X, y)</p>
-                      <p className="text-[#7EA9F8]">prediction = model.predict()</p>
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-7">
-                  <p className="text-[10px] font-bold tracking-[0.2em]" style={{ color: project.accent }}>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-[#35D6C0]">
+                    {project.number}
+                  </span>
+                  <span className="text-xs tracking-widest text-[#AAB8C8]">
                     {project.category}
-                  </p>
-                  <div className="mt-3 flex items-center justify-between gap-3">
-                    <h3 className="text-2xl font-bold text-white">{project.title}</h3>
-                    <span className="text-xl text-[#71859A] transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#35D6C0]">↗</span>
-                  </div>
-                  <p className="mt-3 text-sm leading-7 text-[#AAB8C8]">{project.description}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-[#40566C] px-3 py-1.5 text-[10px] text-[#B7C5D3]">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  </span>
                 </div>
-              </article>
+
+                <h3 className="mt-9 text-2xl font-semibold transition group-hover:text-[#35D6C0]">
+                  {project.title}
+                </h3>
+
+                <p className="mt-4 min-h-[80px] leading-7 text-[#AAB8C8]">
+                  {project.description}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {project.technologies.map((technology) => (
+                    <span
+                      key={technology}
+                      className="rounded-full border border-[#526477] px-3 py-1 text-xs text-[#D5DEE8]"
+                    >
+                      {technology}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-auto flex items-center justify-between gap-3 pt-8">
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="text-sm font-semibold text-[#35D6C0] transition hover:text-white"
+                  >
+                    {es ? "Conocer proyecto" : "Learn more"}
+                    <ArrowUpRight className="ml-1 inline" size={16} />
+                  </button>
+
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} - ${project.linkLabel}`}
+                      className="rounded-full border border-[#526477] p-2 transition hover:border-[#35D6C0] hover:text-[#35D6C0]"
+                    >
+                      <ExternalLink size={17} />
+                    </a>
+                  )}
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SKILLS */}
-      <section id="skills" className="section-padding">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
-          <div>
-            <p className="section-label">04 / {es ? "HABILIDADES" : "SKILLS"}</p>
-            <h2 className="section-title mt-5">
-              {es ? "Herramientas para " : "Tools to "}
-              <span className="accent-text">{es ? "crear." : "create."}</span>
-            </h2>
-            <p className="mt-6 max-w-lg leading-8 text-[#AAB8C8]">
-              {es
-                ? "Conocimientos que he desarrollado mediante clases, prácticas y proyectos académicos. Siempre estoy aprendiendo nuevas herramientas."
-                : "Skills developed through classes, practice, and academic projects. I'm always learning new tools."}
-            </p>
-          </div>
+      {/* PROJECT MODAL */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-5 backdrop-blur-sm"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="w-full max-w-2xl rounded-3xl border border-[#526477] bg-[#1B2B3D] p-8"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-sm tracking-widest text-[#35D6C0]">
+                {selectedProject.category}
+              </span>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="text-2xl text-[#AAB8C8] hover:text-white"
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            {["Python", "HTML & CSS", "JavaScript", "Pandas & NumPy", "Machine Learning", "Data Analysis"].map((skill, i) => (
-              <div key={skill} className="rounded-xl border border-[#34465A] bg-[#1B2B3D] p-5 transition hover:border-[#35D6C0]">
-                <span className="text-xs text-[#35D6C0]">0{i + 1}</span>
-                <p className="mt-3 text-sm font-semibold text-[#E4EBF2]">{skill}</p>
+            <h3 className="mt-6 text-3xl font-semibold">
+              {selectedProject.title}
+            </h3>
+
+            <p className="mt-5 leading-8 text-[#AAB8C8]">
+              {selectedProject.details}
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-2">
+              {selectedProject.technologies.map((technology) => (
+                <span
+                  key={technology}
+                  className="rounded-full border border-[#526477] px-3 py-1 text-xs text-[#D5DEE8]"
+                >
+                  {technology}
+                </span>
+              ))}
+            </div>
+
+            {selectedProject.link && (
+              <a
+                href={selectedProject.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#35D6C0] px-6 py-3 font-semibold text-[#101C2C] transition hover:bg-[#72eadb]"
+              >
+                {selectedProject.linkLabel}
+                <ArrowUpRight size={18} />
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* SKILLS */}
+      <section id="habilidades" className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
+            04 / {es ? "CAPACIDADES" : "ABILITIES"}
+          </p>
+
+          <h2 className="mt-5 text-4xl font-semibold">
+            {es ? "Habilidades" : "Skills"}
+          </h2>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {skills.map((skill) => (
+              <div
+                key={skill.title}
+                className="rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-7"
+              >
+                <div className="text-[#35D6C0]">{skill.icon}</div>
+                <h3 className="mt-5 text-lg font-semibold">{skill.title}</h3>
+
+                <ul className="mt-5 space-y-3 text-sm text-[#AAB8C8]">
+                  {skill.items.map((item) => (
+                    <li key={item}>— {item}</li>
+                  ))}
+                </ul>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-8">
+            <h3 className="text-xl font-semibold">
+              {es ? "Habilidades personales" : "Soft Skills"}
+            </h3>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              {softSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="rounded-full border border-[#526477] px-4 py-2 text-sm text-[#D5DEE8]"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* EDUCATION */}
-      <section id="education" className="section-padding bg-[#142337]">
-        <div className="mx-auto max-w-7xl">
-          <p className="section-label">05 / {es ? "FORMACIÓN" : "EDUCATION"}</p>
-          <h2 className="section-title mt-5">
-            {es ? "Donde todo " : "Where it "}
-            <span className="accent-text">{es ? "comienza." : "begins."}</span>
-          </h2>
+      <section id="educacion" className="px-6 py-24 md:px-16 lg:px-24">
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.7fr_1.3fr]">
+          <div>
+            <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
+              05 / {es ? "FUTURO" : "FUTURE"}
+            </p>
+            <h2 className="mt-5 text-4xl font-semibold">
+              {es ? "Educación y objetivos" : "Education & Goals"}
+            </h2>
+          </div>
 
-          <div className="mt-12 space-y-5">
-            <div className="flex flex-col gap-3 border-l-2 border-[#35D6C0] py-2 pl-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h3 className="text-xl font-bold">Centro ¡Supérate! Fundación Frech</h3>
-                <p className="mt-2 text-sm text-[#AAB8C8]">
-                  {es ? "Informática · Inglés · Valores" : "Computer Science · English · Values"}
-                </p>
-              </div>
-              <span className="text-xs text-[#35D6C0]">{es ? "Formación complementaria" : "Additional education"}</span>
-            </div>
-            <div className="flex flex-col gap-3 border-l-2 border-[#536477] py-2 pl-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h3 className="text-xl font-bold">Instituto Emiliani</h3>
-                <p className="mt-2 text-sm text-[#AAB8C8]">
-                  {es ? "Bachillerato General con Diplomado en Inglés" : "General High School Diploma with English Diploma"}
-                </p>
-              </div>
-              <span className="text-xs text-[#8FA0B3]">{es ? "Educación media" : "High school"}</span>
-            </div>
+          <div className="rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-8">
+            <GraduationCap size={34} className="text-[#35D6C0]" />
+
+            <h3 className="mt-6 text-2xl font-semibold">
+              {es
+                ? "Ingeniería en Mecatrónica y Robótica"
+                : "Mechatronics and Robotics Engineering"}
+            </h3>
+
+            <p className="mt-3 text-[#35D6C0]">Key Institute</p>
+
+            <p className="mt-5 leading-8 text-[#AAB8C8]">
+              {es
+                ? "Mi objetivo académico es continuar desarrollándome en el área tecnológica y estudiar una carrera que combine programación, electrónica, mecánica y robótica."
+                : "My academic goal is to continue developing in the technology field and pursue a degree that combines programming, electronics, mechanics and robotics."}
+            </p>
           </div>
         </div>
       </section>
 
       {/* CONTACT */}
-      <ContactForm language={language} />
+      <section id="contacto" className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
+            06 / {es ? "CONEXIÓN" : "CONNECTION"}
+          </p>
 
-      <footer className="border-t border-[#34465A] px-6 py-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm font-bold text-white">Andrea Rauda<span className="text-[#35D6C0]">.</span></p>
-          <p className="text-xs text-[#71859A]">© 2026 · {es ? "Diseñado y desarrollado por Andrea" : "Designed and developed by Andrea"}</p>
-          <a href="#home" className="text-xs text-[#35D6C0] hover:text-white">{es ? "Volver arriba ↑" : "Back to top ↑"}</a>
+          <h2 className="mt-5 text-4xl font-semibold">
+            {es ? "Hablemos" : "Let's connect"}
+          </h2>
+
+          <p className="mt-5 max-w-xl leading-8 text-[#AAB8C8]">
+            {es
+              ? "Estoy abierta a nuevas oportunidades de aprendizaje, colaboración y proyectos tecnológicos."
+              : "I am open to new learning opportunities, collaborations and technological projects."}
+          </p>
+
+          <div className="mt-10 grid gap-10 md:grid-cols-2">
+            <div className="space-y-6">
+              <a
+                href="mailto:raudaandrea055@gmail.com"
+                className="flex items-center gap-4 text-[#D5DEE8] transition hover:text-[#35D6C0]"
+              >
+                <Mail className="text-[#35D6C0]" />
+                raudaandrea055@gmail.com
+              </a>
+
+              <a
+                href="https://github.com/AndreaRauda"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 text-[#D5DEE8] transition hover:text-[#35D6C0]"
+              >
+                <GitBranch className="text-[#35D6C0]" />
+                GitHub / AndreaRauda
+                <ArrowUpRight size={16} />
+              </a>
+            </div>
+
+            <ContactForm language={language} />
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-[#34465A] px-6 py-8 md:px-16 lg:px-24">
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-[#AAB8C8] md:flex-row">
+          <p>© 2026 Andrea Beatriz Mejia Rauda</p>
+          <p>
+            {es
+              ? "Diseñado y desarrollado con dedicación."
+              : "Designed and developed with dedication."}
+          </p>
         </div>
       </footer>
     </main>

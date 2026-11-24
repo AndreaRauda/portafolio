@@ -12,19 +12,22 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
   const t = translations[language];
 
   const links = [
-    { label: t.nav.home, href: "#home" },
-    { label: t.nav.about, href: "#about" },
-    { label: t.nav.experience, href: "#experience" },
-    { label: t.nav.projects, href: "#projects" },
-    { label: t.nav.skills, href: "#skills" },
-    { label: t.nav.education, href: "#education" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.home, href: "#inicio" },
+    { label: t.nav.about, href: "#sobre-mi" },
+    { label: t.nav.experience, href: "#experiencia" },
+    { label: t.nav.projects, href: "#proyectos" },
+    { label: t.nav.skills, href: "#habilidades" },
+    { label: t.nav.education, href: "#educacion" },
+    { label: t.nav.contact, href: "#contacto" },
   ];
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-[#34465A]/70 bg-[#101C2C]/90 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <a href="#home" className="text-2xl font-black tracking-tight text-white">
+        <a
+          href="#inicio"
+          className="text-2xl font-black tracking-tight text-white"
+        >
           AR<span className="text-[#35D6C0]">.</span>
         </a>
 
@@ -42,7 +45,9 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
 
         <div className="flex items-center rounded-full border border-[#40566C] p-1">
           <button
+            type="button"
             onClick={() => setLanguage("es")}
+            aria-label="Cambiar idioma a español"
             className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
               language === "es"
                 ? "bg-[#35D6C0] text-[#102331]"
@@ -51,8 +56,11 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
           >
             ES
           </button>
+
           <button
+            type="button"
             onClick={() => setLanguage("en")}
+            aria-label="Change language to English"
             className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
               language === "en"
                 ? "bg-[#35D6C0] text-[#102331]"
@@ -69,7 +77,7 @@ export default function Navbar({ language, setLanguage }: NavbarProps) {
           <a
             key={link.href}
             href={link.href}
-            className="shrink-0 text-xs text-[#AAB8C8] hover:text-[#35D6C0]"
+            className="shrink-0 text-xs text-[#AAB8C8] transition hover:text-[#35D6C0]"
           >
             {link.label}
           </a>
