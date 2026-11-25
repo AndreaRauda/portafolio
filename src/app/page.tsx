@@ -241,14 +241,17 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-[#101C2C] text-[#F1F5F9]">
       <Navbar language={language} setLanguage={setLanguage} />
 
+      
       {/* HERO */}
       <section
         id="inicio"
         className="relative flex min-h-[90vh] items-center px-6 py-24 md:px-16 lg:px-24"
       >
         <div className="absolute right-0 top-20 -z-0 h-72 w-72 rounded-full bg-[#35D6C0]/10 blur-[120px]" />
-
+        
         <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-16 md:grid-cols-[1.3fr_0.7fr]">
+        
+          {/* TEXTO PRINCIPAL */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -257,24 +260,27 @@ export default function Home() {
             <p className="mb-6 text-sm font-semibold tracking-[0.35em] text-[#35D6C0]">
               PORTFOLIO 2026
             </p>
-
+        
             <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
               Andrea Beatriz
-              <span className="block text-[#35D6C0]">Mejia Rauda.</span>
+              <span className="block text-[#35D6C0]">
+                Mejia Rauda.
+              </span>
             </h1>
-
+        
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#AAB8C8]">
               {es
                 ? "Estudiante interesada en la programación, la tecnología y el desarrollo de soluciones innovadoras."
                 : "Student interested in programming, technology and the development of innovative solutions."}
             </p>
-
+              
             <p className="mt-3 text-base text-[#AAB8C8]">
               {es
                 ? "Aspirante a Ingeniería en Mecatrónica y Robótica."
                 : "Aspiring Mechatronics and Robotics Engineer."}
             </p>
-
+              
+            {/* BOTONES */}
             <div className="mt-10 flex flex-wrap gap-4">
               <a
                 href="#proyectos"
@@ -283,7 +289,7 @@ export default function Home() {
                 {es ? "Explorar proyectos" : "Explore projects"}
                 <ArrowUpRight size={19} />
               </a>
-
+              
               <a
                 href="#contacto"
                 className="inline-flex items-center gap-3 rounded-full border border-[#526477] px-7 py-3.5 font-medium transition hover:border-[#35D6C0] hover:text-[#35D6C0]"
@@ -292,35 +298,38 @@ export default function Home() {
                 <Mail size={18} />
               </a>
             </div>
-
+              
+            {/* INDICADOR DE DESPLAZAMIENTO */}
             <div className="mt-16 flex items-center gap-3 text-sm text-[#AAB8C8]">
               <span className="h-px w-12 bg-[#35D6C0]" />
               {es ? "Desliza para conocer más" : "Scroll to discover more"}
               <ArrowDown size={16} className="text-[#35D6C0]" />
             </div>
           </motion.div>
-
+              
+          {/* FOTOGRAFÍA */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="relative mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center rounded-[2rem] border border-[#34465A] bg-[#1B2B3D] p-8"
+            className="relative mx-auto aspect-square w-full max-w-[340px] overflow-hidden rounded-[2rem] border border-[#34465A] bg-[#1B2B3D] p-4"
           >
-            <div className="absolute inset-4 rounded-[1.5rem] border border-[#35D6C0]/20" />
-            <div className="text-center">
-              <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-3xl bg-[#35D6C0]/10 text-[#35D6C0]">
-                <Code2 size={48} strokeWidth={1.3} />
-              </div>
-              <p className="text-xl font-semibold">Technology</p>
-              <p className="mt-2 text-sm tracking-widest text-[#AAB8C8]">
-                LEARN · CREATE · INNOVATE
-              </p>
-            </div>
-            <span className="absolute -right-3 top-12 h-5 w-5 rounded-full bg-[#35D6C0]" />
-            <span className="absolute -bottom-3 left-12 h-5 w-5 rounded-full border-2 border-[#35D6C0] bg-[#101C2C]" />
+            <div className="absolute inset-4 z-10 rounded-[1.5rem] border border-[#35D6C0]/30 pointer-events-none" />
+              
+            <img
+              src="/images/perfil.jpg"
+              alt="Fotografía de Andrea"
+              className="h-full w-full rounded-[1.5rem] object-cover object-center"
+            />
+      
+            <span className="absolute -right-1 top-12 z-20 h-5 w-5 rounded-full bg-[#35D6C0]" />
+              
+            <span className="absolute -bottom-1 left-12 z-20 h-5 w-5 rounded-full border-2 border-[#35D6C0] bg-[#101C2C]" />
           </motion.div>
+              
         </div>
       </section>
+
 
       {/* ABOUT */}
       <section
