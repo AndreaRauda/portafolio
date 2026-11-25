@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -26,6 +27,10 @@ type Project = {
   technologies: string[];
   link?: string;
   linkLabel?: string;
+  links?: {
+    label: string;
+    url: string;
+  }[];
   details: string;
 };
 
@@ -57,22 +62,54 @@ export default function Home() {
       description: es
         ? "Análisis y agrupación de zonas comerciales mediante técnicas de aprendizaje automático."
         : "Analysis and clustering of commercial areas using machine learning techniques.",
-      technologies: ["Python", "Pandas", "K-Means", "Streamlit"],
+      technologies: ["Python", "Pandas", "K-Means", "KNN", "Streamlit"],
       details: es
-        ? "Proyecto de análisis de datos que utiliza K-Means para identificar grupos de zonas comerciales. Se evaluaron diferentes cantidades de agrupaciones utilizando métricas como inercia y silhouette score."
-        : "Data analysis project using K-Means to identify groups of commercial areas. Different cluster configurations were evaluated using metrics such as inertia and silhouette score.",
+        ? "Proyecto de análisis geoespacial que estudia la distribución de 11 sucursales de Wendy's en San Salvador. Utiliza K-Means para identificar agrupaciones comerciales y KNN con distancia Haversine para evaluar nuevas ubicaciones."
+        : "Geospatial analysis project studying the distribution of 11 Wendy's locations in San Salvador. It uses K-Means to identify commercial clusters and KNN with Haversine distance to evaluate new locations.",
+      links: [
+        {
+          label: es ? "Repositorio" : "Repository",
+          url: "https://github.com/AndreaRauda/hotspots-comerciales",
+        },
+        {
+          label: es ? "Presentación" : "Presentation",
+          url: "https://canva.link/8oqwiq9e31apia5",
+        },
+        {
+          label: es ? "Informe PDF" : "PDF Report",
+          url: "/projects/hotspots/Informe.pdf",
+        },
+      ],
     },
     {
       number: "03",
       category: "PYTHON DEVELOPMENT",
       title: "Laberinto interactivo",
       description: es
-        ? "Aplicación desarrollada en Python para generar y resolver laberintos."
-        : "Python application designed to generate and solve mazes.",
-      technologies: ["Python", "Pygame", "DFS", "BFS"],
+        ? "Juego de laberinto procedural desarrollado originalmente en Python y adaptado posteriormente para jugar desde el navegador."
+        : "Procedural maze game originally developed in Python and later adapted to be played directly in the browser.",
+      technologies: [
+        "Python",
+        "Pygame",
+        "DFS",
+        "BFS",
+        "JavaScript",
+        "HTML",
+        "CSS",
+      ],
       details: es
-        ? "Proyecto individual que trabaja con algoritmos de búsqueda para explorar y resolver laberintos. Se utilizaron estrategias como Depth-First Search y Breadth-First Search."
-        : "Individual project using search algorithms to explore and solve mazes. Strategies such as Depth-First Search and Breadth-First Search were implemented.",
+        ? "Proyecto individual que genera laberintos aleatorios mediante el algoritmo Depth-First Search (DFS) y encuentra la ruta más corta mediante Breadth-First Search (BFS). Cuenta con movimiento mediante teclado, contador de pasos y sistema de pistas. La versión original fue desarrollada en Python con Pygame y posteriormente se creó una adaptación web."
+        : "Individual project that generates random mazes using Depth-First Search (DFS) and finds the shortest path using Breadth-First Search (BFS). It includes keyboard movement, a step counter and a hint system. The original version was developed in Python with Pygame and later adapted for the web.",
+      links: [
+        {
+          label: es ? "Código Python" : "Python Source",
+          url: "https://github.com/AndreaRauda/Laberinto-DFS-BFS",
+        },
+        {
+          label: es ? "Probar juego" : "Play Game",
+          url: "/projects/laberinto2/index.html"
+        },
+      ],
     },
     {
       number: "04",
@@ -83,8 +120,14 @@ export default function Home() {
         : "Predictive model analyzing the relationship between study hours and academic performance.",
       technologies: ["Python", "Pandas", "Matplotlib", "Scikit-learn"],
       details: es
-        ? "Proyecto de análisis y predicción utilizando regresión lineal. Se trabajó con datos de horas de estudio y calificaciones, evaluando el modelo mediante métricas como R² y error cuadrático medio."
-        : "Analysis and prediction project using linear regression. Study hours and grades were analyzed, evaluating the model with metrics such as R² and mean squared error.",
+        ? "Proyecto académico que utiliza regresión lineal para analizar datos de ejemplo sobre horas de estudio y calificaciones. El modelo realiza predicciones dentro del rango de datos disponible y se evalúa mediante métricas como R² y error cuadrático medio."
+        : "Academic project using linear regression to analyze sample data about study hours and grades. The model makes predictions within the available data range and is evaluated using metrics such as R² and mean squared error.",
+      links: [
+        {
+          label: es ? "Repositorio" : "Repository",
+          url: "https://github.com/AndreaRauda/Regresion-Lineal",
+        },
+      ],
     },
     {
       number: "05",
@@ -93,36 +136,59 @@ export default function Home() {
       description: es
         ? "Exploración de algoritmos de inteligencia artificial para clasificación y agrupación de datos."
         : "Exploration of artificial intelligence algorithms for data classification and clustering.",
-      technologies: ["Python", "K-Means", "KNN", "Data Analysis"],
+      technologies: [
+        "Python",
+        "NumPy",
+        "Pandas",
+        "K-Means",
+        "KNN",
+        "Scikit-learn",
+      ],
       details: es
-        ? "Proyecto basado en un conjunto de datos simulado de 500 estudiantes. Se utilizaron K-Means para agrupar datos y KNN para clasificación, comparando resultados con datos normalizados y sin normalizar."
-        : "Project based on a simulated dataset of 500 students. K-Means was used for clustering and KNN for classification, comparing results with normalized and non-normalized data.",
+        ? "Proyecto basado en un conjunto de datos simulado de 500 estudiantes. Se utilizaron K-Means para agrupar datos y KNN para clasificar estudiantes como aprobados o reprobados. También se comparó el rendimiento del modelo con datos normalizados y sin normalizar."
+        : "Project based on a simulated dataset of 500 students. K-Means was used to cluster data and KNN to classify students as passing or failing. Model performance was also compared using normalized and non-normalized data.",
+      links: [
+        {
+          label: es ? "Repositorio" : "Repository",
+          url: "https://github.com/AndreaRauda/AI-Challenge-KMeans-KNN",
+        },
+      ],
     },
     {
       number: "06",
       category: "WEB DEVELOPMENT",
       title: "El Horóscopo",
       description: es
-        ? "Proyecto web desarrollado con tecnologías de frontend y recursos visuales."
-        : "Web project developed using frontend technologies and visual resources.",
-      technologies: ["HTML", "CSS", "JavaScript"],
+        ? "Sitio web desarrollado con HTML y CSS para explorar los doce signos zodiacales."
+        : "Website developed with HTML and CSS to explore the twelve zodiac signs.",
+      technologies: ["HTML5", "CSS3"],
       details: es
-        ? "Proyecto de desarrollo web en el que se trabajó con estructura HTML, estilos CSS y funcionalidades JavaScript. Actualmente se encuentra pendiente de organizar y revisar algunos recursos y enlaces."
-        : "Web development project involving HTML structure, CSS styling and JavaScript functionality. Some resources and links still need to be organized and reviewed.",
+        ? "Proyecto web académico organizado en diferentes páginas temáticas. Presenta información de los signos zodiacales agrupados en los cuatro elementos: agua, aire, fuego y tierra. Incluye imágenes y hojas de estilo propias."
+        : "Academic web project organized into different thematic pages. It presents information about zodiac signs grouped into the four elements: water, air, fire and earth. It includes images and custom stylesheets.",
+      links: [
+        {
+          label: es ? "Repositorio" : "Repository",
+          url: "https://github.com/AndreaRauda/Horoscopo-Web",
+        },
+        {
+          label: es ? "Ver proyecto" : "View Project",
+          url: "/projects/Horoscopo/proyecto.html",
+        },
+      ],
     },
     {
       number: "07",
       category: "APP DEVELOPMENT",
       title: "Voltify",
       description: es
-        ? "Aplicación desarrollada con Power Apps como solución tecnológica."
-        : "Application developed with Power Apps as a technological solution.",
-      technologies: ["Power Apps", "Backend", "App Development"],
+        ? "Aplicación desarrollada con Microsoft Power Apps como solución tecnológica."
+        : "Application developed with Microsoft Power Apps as a technological solution.",
+      technologies: ["Power Apps", "App Development"],
       link: "https://apps.powerapps.com/play/e/default-d8e3bd44-0bba-426b-952d-ada7bb17393c/a/7e7fec02-b2f4-4706-a6ad-2f4a6ce2d9f8?tenantId=d8e3bd44-0bba-426b-952d-ada7bb17393c&sourcetime=1795528860736",
       linkLabel: es ? "Ver aplicación" : "View application",
       details: es
-        ? "Proyecto realizado en equipo utilizando Power Apps. Mi participación estuvo principalmente relacionada con el backend, además de colaborar en algunas tareas de traducción y frontend."
-        : "Team project developed using Power Apps. My contribution was mainly related to backend tasks, with additional support in translation and frontend work.",
+        ? "Proyecto realizado en equipo utilizando Microsoft Power Apps. Mi participación estuvo principalmente relacionada con el backend, además de colaborar en algunas tareas de traducción y frontend."
+        : "Team project developed using Microsoft Power Apps. My contribution was mainly related to backend tasks, with additional support in translation and frontend work.",
     },
   ];
 
@@ -193,10 +259,8 @@ export default function Home() {
             </p>
 
             <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
-              {es ? "Andrea Beatriz" : "Andrea Beatriz"}
-              <span className="block text-[#35D6C0]">
-                Mejia Rauda.
-              </span>
+              Andrea Beatriz
+              <span className="block text-[#35D6C0]">Mejia Rauda.</span>
             </h1>
 
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#AAB8C8]">
@@ -259,7 +323,10 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="sobre-mi" className="border-t border-[#34465A] px-6 py-24 md:px-16 lg:px-24">
+      <section
+        id="sobre-mi"
+        className="border-t border-[#34465A] px-6 py-24 md:px-16 lg:px-24"
+      >
         <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.7fr_1.3fr]">
           <div>
             <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
@@ -287,7 +354,10 @@ export default function Home() {
       </section>
 
       {/* EXPERIENCE */}
-      <section id="experiencia" className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24">
+      <section
+        id="experiencia"
+        className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24"
+      >
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
             02 / {es ? "FORMACIÓN" : "BACKGROUND"}
@@ -352,13 +422,13 @@ export default function Home() {
               <motion.article
                 key={project.number}
                 whileHover={{ y: -6 }}
-                className="group flex flex-col rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-7 transition hover:border-[#35D6C0]/70"
+                className="group flex min-w-0 flex-col rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-7 transition hover:border-[#35D6C0]/70"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm font-semibold text-[#35D6C0]">
                     {project.number}
                   </span>
-                  <span className="text-xs tracking-widest text-[#AAB8C8]">
+                  <span className="text-right text-xs tracking-widest text-[#AAB8C8]">
                     {project.category}
                   </span>
                 </div>
@@ -382,7 +452,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="mt-auto flex items-center justify-between gap-3 pt-8">
+                <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-8">
                   <button
                     onClick={() => setSelectedProject(project)}
                     className="text-sm font-semibold text-[#35D6C0] transition hover:text-white"
@@ -391,7 +461,21 @@ export default function Home() {
                     <ArrowUpRight className="ml-1 inline" size={16} />
                   </button>
 
-                  {project.link && (
+                  {project.links ? (
+                    <div className="flex flex-wrap gap-2">
+                      {project.links.map((item) => (
+                        <a
+                          key={item.label}
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-full border border-[#526477] px-3 py-2 text-xs text-[#D5DEE8] transition hover:border-[#35D6C0] hover:text-[#35D6C0]"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </div>
+                  ) : project.link ? (
                     <a
                       href={project.link}
                       target="_blank"
@@ -401,7 +485,7 @@ export default function Home() {
                     >
                       <ExternalLink size={17} />
                     </a>
-                  )}
+                  ) : null}
                 </div>
               </motion.article>
             ))}
@@ -412,20 +496,20 @@ export default function Home() {
       {/* PROJECT MODAL */}
       {selectedProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-5 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/75 p-5 backdrop-blur-sm"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="w-full max-w-2xl rounded-3xl border border-[#526477] bg-[#1B2B3D] p-8"
+            className="my-auto w-full max-w-2xl rounded-3xl border border-[#526477] bg-[#1B2B3D] p-8"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <span className="text-sm tracking-widest text-[#35D6C0]">
                 {selectedProject.category}
               </span>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="text-2xl text-[#AAB8C8] hover:text-white"
+                className="text-2xl text-[#AAB8C8] transition hover:text-white"
                 aria-label="Close"
               >
                 ×
@@ -451,7 +535,24 @@ export default function Home() {
               ))}
             </div>
 
-            {selectedProject.link && (
+            {selectedProject.links && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {selectedProject.links.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#35D6C0] px-5 py-3 text-sm font-semibold text-[#101C2C] transition hover:bg-[#72eadb]"
+                  >
+                    {item.label}
+                    <ArrowUpRight size={17} />
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {!selectedProject.links && selectedProject.link && (
               <a
                 href={selectedProject.link}
                 target="_blank"
@@ -467,7 +568,10 @@ export default function Home() {
       )}
 
       {/* SKILLS */}
-      <section id="habilidades" className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24">
+      <section
+        id="habilidades"
+        className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24"
+      >
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
             04 / {es ? "CAPACIDADES" : "ABILITIES"}
@@ -546,9 +650,13 @@ export default function Home() {
         </div>
       </section>
 
+      
       {/* CONTACT */}
-      <section id="contacto" className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24">
-        <div className="mx-auto max-w-7xl">
+      <section
+        id="contacto"
+        className="bg-[#142337] px-6 py-24 md:px-16 lg:px-24"
+      >
+        <div className="mx-auto max-w-4xl">
           <p className="text-sm font-semibold tracking-[0.3em] text-[#35D6C0]">
             06 / {es ? "CONEXIÓN" : "CONNECTION"}
           </p>
@@ -557,38 +665,78 @@ export default function Home() {
             {es ? "Hablemos" : "Let's connect"}
           </h2>
 
-          <p className="mt-5 max-w-xl leading-8 text-[#AAB8C8]">
+          <p className="mt-5 max-w-2xl leading-8 text-[#AAB8C8]">
             {es
               ? "Estoy abierta a nuevas oportunidades de aprendizaje, colaboración y proyectos tecnológicos."
               : "I am open to new learning opportunities, collaborations and technological projects."}
           </p>
-
-          <div className="mt-10 grid gap-10 md:grid-cols-2">
-            <div className="space-y-6">
+            
+          {/* FORMULARIO */}
+          <div className="mt-12 w-full rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-6 sm:p-9">
+            <div className="mb-7">
+              <h3 className="text-2xl font-semibold">
+                {es ? "Envíame un mensaje" : "Send me a message"}
+              </h3>
+              <p className="mt-2 text-sm leading-7 text-[#AAB8C8]">
+                {es
+                  ? "Completa el formulario y me pondré en contacto contigo."
+                  : "Complete the form and I will get back to you."}
+              </p>
+            </div>
+                
+            <ContactForm language={language} />
+          </div>
+                
+          {/* INFORMACIÓN DE CONTACTO */}
+          <div className="mt-8 rounded-2xl border border-[#34465A] bg-[#1B2B3D] p-6 sm:p-8">
+            <h3 className="text-lg font-semibold">
+              {es ? "También puedes encontrarme en" : "You can also find me at"}
+            </h3>
+                
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <a
                 href="mailto:raudaandrea055@gmail.com"
-                className="flex items-center gap-4 text-[#D5DEE8] transition hover:text-[#35D6C0]"
+                className="flex min-w-0 items-center gap-4 rounded-xl border border-[#34465A] p-4 transition hover:border-[#35D6C0]"
               >
-                <Mail className="text-[#35D6C0]" />
-                raudaandrea055@gmail.com
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#35D6C0]/10 text-[#35D6C0]">
+                  <Mail size={21} />
+                </span>
+                
+                <span className="min-w-0">
+                  <span className="block text-xs text-[#AAB8C8]">
+                    {es ? "Correo electrónico" : "Email address"}
+                  </span>
+                  <span className="mt-1 block break-all text-sm font-medium text-[#D5DEE8]">
+                    raudaandrea055@gmail.com
+                  </span>
+                </span>
               </a>
-
+                
               <a
                 href="https://github.com/AndreaRauda"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 text-[#D5DEE8] transition hover:text-[#35D6C0]"
+                className="flex min-w-0 items-center gap-4 rounded-xl border border-[#34465A] p-4 transition hover:border-[#35D6C0]"
               >
-                <GitBranch className="text-[#35D6C0]" />
-                GitHub / AndreaRauda
-                <ArrowUpRight size={16} />
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#35D6C0]/10 text-[#35D6C0]">
+                  <GitBranch size={21} />
+                </span>
+                
+                <span className="min-w-0">
+                  <span className="block text-xs text-[#AAB8C8]">
+                    GitHub
+                  </span>
+                  <span className="mt-1 block text-sm font-medium text-[#D5DEE8]">
+                    AndreaRauda
+                  </span>
+                </span>
+                <ArrowUpRight size={17} className="ml-auto shrink-0 text-[#35D6C0]" />
               </a>
             </div>
-
-            <ContactForm language={language} />
           </div>
         </div>
       </section>
+
 
       {/* FOOTER */}
       <footer className="border-t border-[#34465A] px-6 py-8 md:px-16 lg:px-24">

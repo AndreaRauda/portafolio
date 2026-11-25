@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>Laberinto | DFS vs BFS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-container">
+    <header class="header">
+      <div>
+        <p class="eyebrow">JUEGO INTERACTIVO</p>
+        <h1>LABERINTO<span>.</span></h1>
+        <p class="subtitle">DFS Generation <span>×</span> BFS Pathfinding</p>
+      </div>
+      <div class="status">
+        <span class="status-dot"></span>
+        <span>EN LÍNEA</span>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat">
+        <span class="stat-label">PASOS</span>
+        <strong id="steps">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label">DISTANCIA MÍNIMA</span>
+        <strong id="distance">--</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label">ESTADO</span>
+        <strong id="game-status">JUGANDO</strong>
+      </div>
+    </section>
+
+    <section class="board-wrapper">
+      <div class="board-heading">
+        <span>MAPA PROCEDURAL</span>
+        <span id="level">NIVEL 01</span>
+      </div>
+      <div id="maze" class="maze" role="application" aria-label="Laberinto. Usa las flechas o WASD para moverte."></div>
+
+      <div id="victory" class="victory hidden">
+        <div class="victory-card">
+          <span class="victory-icon">✦</span>
+          <p class="eyebrow">MISIÓN COMPLETADA</p>
+          <h2>¡LO LOGRASTE!</h2>
+          <p id="victory-message">Has encontrado la salida.</p>
+          <button id="play-again" class="primary-button">JUGAR DE NUEVO ↗</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="instructions">
+        <h3>CONTROLES</h3>
+        <p><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> o <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> para moverte.</p>
+        <p><kbd>H</kbd> Mostrar pista durante 3 segundos.</p>
+        <p><kbd>R</kbd> Generar un nuevo laberinto.</p>
+      </div>
+      <div class="actions">
+        <button id="hint-button" class="secondary-button">⌁ VER PISTA</button>
+        <button id="restart-button" class="primary-button">↻ REINICIAR</button>
+      </div>
+    </section>
+
+    <footer>
+      <span>ALGORITMO DFS · GENERACIÓN PROCEDURAL</span>
+      <span>ALGORITMO BFS · RUTA MÁS CORTA</span>
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
